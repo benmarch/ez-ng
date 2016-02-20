@@ -1,6 +1,6 @@
+/* global angular: false */
 (function (module) {
     'use strict';
-
 
     /**
      * Shim for angular 1.5's component service (copied from AngularJs source)
@@ -12,10 +12,14 @@
 
         var CNTRL_REG = /^(\S+)(\s+as\s+([\w$]+))?$/;
         function identifierForController(controller, ident) {
-            if (ident && angular.isString(ident)) return ident;
+            if (ident && angular.isString(ident)) {
+                return ident;
+            }
             if (angular.isString(controller)) {
                 var match = CNTRL_REG.exec(controller);
-                if (match) return match[3];
+                if (match) {
+                    return match[3];
+                }
             }
         }
 

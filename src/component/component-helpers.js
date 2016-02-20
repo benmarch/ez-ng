@@ -1,3 +1,4 @@
+/* global angular:false */
 (function (module) {
     'use strict';
 
@@ -46,9 +47,9 @@
                 });
             };
 
-            return helpers
+            return helpers;
 
-        }
+        };
 
     }]);
 

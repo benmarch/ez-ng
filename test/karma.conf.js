@@ -29,6 +29,10 @@ module.exports = function (config) {
             'spec/**/*.js'
         ],
 
+        exclude: [
+            '../src/lib/**/*.js'
+        ],
+
         /*
          Test results reporter to use:
          dots, progress, nyan, story, coverage etc.
