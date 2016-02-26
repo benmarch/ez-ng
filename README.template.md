@@ -9,9 +9,9 @@
 [![Gitter][gitter-image]][gitter-url]
 [![GitTip][tip-image]][tip-url]
 
-## ezNg
+## API Reference
 
-TODO: document
+{{{DOCUMENTATION}}}
 
 ## License
 
