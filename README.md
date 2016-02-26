@@ -492,6 +492,9 @@ Sets the output format of date and time. Function takes the current date (new Da
 Shim for angular 1.5's component service (copied from AngularJs source)
 https://github.com/angular/angular.js/blob/master/src/ng/compile.js
 
+See [Angular's Component documentation](https://docs.angularjs.org/api/ng/provider/$compileProvider#component)
+for all options.
+
 Additionally provides styles and stylesUrl options for injecting "scoped" styles. See component-helpers.js
 
 Does not support the one-way binding operator ('<') in versions < 1.5
