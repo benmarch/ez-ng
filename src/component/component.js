@@ -3,10 +3,37 @@
     'use strict';
 
     /**
+     * @ngdoc service
+     * @name module:ezNg.ezComponent
+     *
+     * @function
+     * @param {object} options Options to pass into directive definition
+     *
+     * @description
      * Shim for angular 1.5's component service (copied from AngularJs source)
      * https://github.com/angular/angular.js/blob/master/src/ng/compile.js
      *
-     * Additionally provides styles and stylesUrl options for injecting "scoped" styles. See directive-helpers.js
+     * Additionally provides styles and stylesUrl options for injecting "scoped" styles. See component-helpers.js
+     *
+     * Does not support the one-way binding operator ('<') in versions < 1.5
+     *
+     * @example
+     * ```js
+     * module.directive('myComponent', ['ezComponent', function (ezComponent) {
+     *
+     *     return ezComponent({
+     *         bindings: {
+     *             watched: '=',
+     *             input: '@',
+     *             output: '&'
+     *         },
+     *         styles: '.my-component { color: red; }',
+     *         //OR
+     *         stylesUrl: 'components/my-component/my-component.css'
+     *     });
+     *
+     * }]);
+     * ```
      */
     module.factory('ezComponent', ['$injector', 'ezComponentHelpers', function ($injector, ch) {
 

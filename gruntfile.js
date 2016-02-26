@@ -76,6 +76,14 @@ module.exports = function (grunt) {
                     }
                 }
             }
+        },
+
+
+        jsdoc2md: {
+            oneOutputFile: {
+                src: 'src/**/*.js',
+                dest: 'docs/documentation.md'
+            }
         }
     });
 
@@ -93,4 +101,11 @@ module.exports = function (grunt) {
         'test',
         'build'
     ]);
+
+    grunt.registerTask('docs', function () {
+        var readme = grunt.file.read('README.template.md'),
+            docs = grunt.file.read('docs/documentation.md');
+
+        grunt.file.write('README.md', readme.replace('{{{DOCUMENTATION}}}', docs));
+    });
 };
