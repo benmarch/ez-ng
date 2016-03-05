@@ -13,11 +13,21 @@
 
 Install with Bower:
 
-    bower install ez-ng --save
+```js
+bower install ez-ng --save
+```
     
 Install with NPM:
 
-    npm install ez-ng --save
+```js
+npm install ez-ng --save
+```    
+    
+Include the module:
+
+```js
+angular.module('myApp', ['ezNg']);
+```
 
 ## API Reference
 
