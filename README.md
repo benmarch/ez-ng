@@ -145,7 +145,7 @@ ch.useTemplateUrl('/components/my-component/template.html'); //<span>Hello, Worl
 <a name="module_ezNg.ezComponentHelpers+useStyles"></a>
 #### ezComponentHelpers.useStyles()
 Takes a string of CSS styles and adds them to the element. The styles become scoped to the element
-thanks to a fantastic script by Rich Tibbett (http://github.com/richtr). Note that the element itself
+thanks to a fantastic script by PM5544 (https://github.com/PM5544/scoped-polyfill). Note that the element itself
 will also be affected by the scoped styles. Styles are applied after a browser event cycle.
 
 **Kind**: instance method of <code>[ezComponentHelpers](#module_ezNg.ezComponentHelpers)</code>  

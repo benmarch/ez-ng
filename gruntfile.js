@@ -96,13 +96,18 @@ module.exports = function (grunt) {
         'uglify'
     ]);
 
+    grunt.registerTask('docs', [
+        'jsdoc2md',
+        'readme'
+    ]);
+
     grunt.registerTask('default', [
         'jshint',
         'test',
         'build'
     ]);
 
-    grunt.registerTask('docs', function () {
+    grunt.registerTask('readme', function () {
         var readme = grunt.file.read('README.template.md'),
             docs = grunt.file.read('docs/documentation.md');
 
