@@ -78,6 +78,14 @@ module.exports = function (grunt) {
             }
         },
 
+        release: {
+            options: {
+                additionalFiles: ['bower.json'],
+                indentation: '    ',
+                commitMessage: 'Bumped version to <%= version %>',
+                tagMessage: 'Committing release tag <%= version %>'
+            }
+        },
 
         jsdoc2md: {
             oneOutputFile: {

@@ -9,6 +9,16 @@
 [![Gitter][gitter-image]][gitter-url]
 [![GitTip][tip-image]][tip-url]
 
+## Getting Started
+
+Install with Bower:
+
+    bower install ez-ng --save
+    
+Install with NPM:
+
+    npm install ez-ng --save
+
 ## API Reference
 
 {{{DOCUMENTATION}}}
