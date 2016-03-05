@@ -143,7 +143,8 @@
              * ```
              */
             helpers.useStyles = function (styles) {
-                var el = $document[0].createElement('style');
+                var el = $document[0].createElement('style'),
+                    wrapper = angular.element($document[0].createElement('scopedstylewrapper'));
 
                 el.type = 'text/css';
                 el.scoped = true;
@@ -155,7 +156,9 @@
                     el.appendChild($document[0].createTextNode(styles));
                 }
 
-                element.append(el);
+                element.after(wrapper);
+                wrapper.append(element);
+                wrapper.append(el);
                 $window.scopedPolyFill(el);
             };
 
