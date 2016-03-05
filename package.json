@@ -1,69 +1,69 @@
 {
-    "name": "ez-ng",
-    "version": "0.1.0",
-    "description": "A collection of very simple utilities that make developing AngularJS apps much easier",
-    "author": {
-        "name": "Ben March",
-        "email": "bmarch89@gmail.com",
-        "url": "https://github.com/benmarch"
-    },
-    "homepage": "https://github.com/benmarch/ez-ng",
-    "bugs": {
-        "url": "https://github.com/benmarch/ez-ng/issues"
-    },
-    "license": "MIT",
-    "maintainers": [
-        {
-            "name": "Ben March",
-            "email": "bmarch89@gmail.com",
-            "url": "https://github.com/benmarch"
-        }
-    ],
-    "contributors": [
-        {
-            "name": "Ben March",
-            "email": "bmarch89@gmail.com",
-            "url": "https://github.com/benmarch"
-        }
-    ],
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/benmarch/ez-ng.git"
-    },
-    "main": "dist/ez-ng.js",
-    "scripts": {
-        "test": "grunt"
-    },
-    "keywords": [
-        "angular",
-        "angularjs",
-        "event emitter",
-        "simple",
-        "components"
-    ],
-    "dependencies": {},
-    "devDependencies": {
-        "grunt": "*",
-        "grunt-complexity": "*",
-        "grunt-contrib-concat": "^0.5.1",
-        "grunt-contrib-jshint": "*",
-        "grunt-contrib-uglify": "^0.11.0",
-        "grunt-jsdoc-to-markdown": "^1.2.0",
-        "grunt-karma": "*",
-        "grunt-ngdocs": "^0.2.9",
-        "grunt-release": "^0.13.0",
-        "grunt-wiredep": "^2.0.0",
-        "jasmine-core": "^2.4.1",
-        "karma": "^0.13.15",
-        "karma-coverage": "*",
-        "karma-jasmine": "*",
-        "karma-phantomjs-launcher": "*",
-        "load-grunt-tasks": "^3.3.0",
-        "phantomjs": "^1.9.19",
-        "phantomjs-prebuilt": "^2.1.4",
-        "time-grunt": "^1.2.2"
-    },
-    "engines": {
-        "node": ">=0.10.0"
+  "name": "ez-ng",
+  "version": "0.1.1",
+  "description": "A collection of very simple utilities that make developing AngularJS apps much easier",
+  "author": {
+    "name": "Ben March",
+    "email": "bmarch89@gmail.com",
+    "url": "https://github.com/benmarch"
+  },
+  "homepage": "https://github.com/benmarch/ez-ng",
+  "bugs": {
+    "url": "https://github.com/benmarch/ez-ng/issues"
+  },
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "Ben March",
+      "email": "bmarch89@gmail.com",
+      "url": "https://github.com/benmarch"
     }
+  ],
+  "contributors": [
+    {
+      "name": "Ben March",
+      "email": "bmarch89@gmail.com",
+      "url": "https://github.com/benmarch"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/benmarch/ez-ng.git"
+  },
+  "main": "dist/ez-ng.js",
+  "scripts": {
+    "test": "grunt"
+  },
+  "keywords": [
+    "angular",
+    "angularjs",
+    "event emitter",
+    "simple",
+    "components"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-complexity": "*",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-uglify": "^0.11.0",
+    "grunt-jsdoc-to-markdown": "^1.2.0",
+    "grunt-karma": "*",
+    "grunt-ngdocs": "^0.2.9",
+    "grunt-release": "^0.13.0",
+    "grunt-wiredep": "^2.0.0",
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.15",
+    "karma-coverage": "*",
+    "karma-jasmine": "*",
+    "karma-phantomjs-launcher": "*",
+    "load-grunt-tasks": "^3.3.0",
+    "phantomjs": "^1.9.19",
+    "phantomjs-prebuilt": "^2.1.4",
+    "time-grunt": "^1.2.2"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  }
 }
