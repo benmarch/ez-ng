@@ -56,8 +56,7 @@
     "test"
   ],
   "dependencies": {
-    "angular": "angularjs#~1.4.8",
-    "scoper": "git@github.com:benmarch/scoper.git#master"
+    "angular": "angularjs#~1.4.8"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.8"
