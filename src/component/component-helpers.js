@@ -35,6 +35,12 @@
      */
     module.factory('ezComponentHelpers', ['$http', '$templateCache', '$compile', '$document', '$window', function ($http, $templateCache, $compile, $document, $window) {
 
+        var scopedStyleSequence = 10000,
+            styleNode = $document[0].createElement('style');
+
+        styleNode.type = 'text/css';
+        (document.head || document.getElementsByTagName('head')[0]).appendChild(styleNode);
+
         return function (scope, element, attrs, ctrl, transclude) {
 
             var helpers = {};
@@ -108,7 +114,7 @@
              *
              * @description
              * Takes a string of CSS styles and adds them to the element. The styles become scoped to the element
-             * thanks to a fantastic script by PM5544 (https://github.com/PM5544/scoped-polyfill). Note that the element itself
+             * thanks to a fantastic script by Thomas Park (https://github.com/thomaspark/scoper). Note that the element itself
              * will also be affected by the scoped styles. Styles are applied after a browser event cycle.
              *
              * @example
@@ -127,25 +133,23 @@
              * ```
              */
             helpers.useStyles = function (styles) {
-                var el = $document[0].createElement('style'),
-                    wrapper = angular.element($document[0].createElement('scopedstylewrapper'));
+                var el = styleNode,
+                    wrapper = angular.element($document[0].createElement('span')),
+                    id = 'scoper-' + scopedStyleSequence++;
 
-                el.type = 'text/css';
+                wrapper[0].id = id;
+                element.after(wrapper);
+                wrapper.append(element);
+
+                styles = $window.scoper(styles, '#' + id);
+                /*el.type = 'text/css';
                 el.scoped = true;
-                el.setAttribute('scoped', 'scoped');
-
+                el.setAttribute('scoped', 'scoped');*/
                 if (el.styleSheet){
-                    el.styleSheet.cssText = styles;
+                    el.styleSheet.cssText += styles;
                 } else {
                     el.appendChild($document[0].createTextNode(styles));
                 }
-
-                //due to a bug with the scoped style polyfill,
-                //we have to wrap the element
-                element.after(wrapper);
-                wrapper.append(element);
-                wrapper.append(el);
-                $window.scopedPolyFill(el);
             };
 
             /**
