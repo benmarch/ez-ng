@@ -158,7 +158,8 @@
              */
             emitter.emit = function (eventName/*, arguments*/) {
                 var args = Array.prototype.slice.call(arguments),
-                    handlerCount = 0;
+                    handlerCount = 0,
+                    toRemove = [];
 
                 args.shift();
 
@@ -167,8 +168,11 @@
                     angular.forEach(handlers[eventName], function (handler) {
                         handler.apply(null, args);
                         if (handler.onlyOnce) {
-                            emitter.off(eventName, handler);
+                            toRemove.push(handler);
                         }
+                    });
+                    angular.forEach(toRemove, function (handler) {
+                        emitter.off(eventName, handler);
                     });
                 }
                 $log.debug('Emitted event '+ eventName + ' with emitter ' + emitter.name || '(anonymous)' + '. Invoked ' + handlerCount + ' handlers.');

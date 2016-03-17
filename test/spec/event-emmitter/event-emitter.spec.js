@@ -89,6 +89,25 @@ describe('ezEventEmitter', function () {
         expect(handler.calls.count()).toBe(1);
     });
 
+    it('should call all once handlers', function () {
+        //given
+        var em = ezEventEmitter.create('myEmitter');
+        var handler1 = jasmine.createSpy();
+        var handler2 = jasmine.createSpy();
+        var handler3 = jasmine.createSpy();
+        em.once('test', handler1);
+        em.once('test', handler2);
+        em.once('test', handler3);
+
+        //when
+        em.emit('test');
+
+        //then
+        expect(handler1).toHaveBeenCalled();
+        expect(handler2).toHaveBeenCalled();
+        expect(handler3).toHaveBeenCalled();
+    });
+
     it('should call all handlers', function () {
         //given
         var em = ezEventEmitter.create('myEmitter');
