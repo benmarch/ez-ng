@@ -11,9 +11,12 @@
      * Provides a simple event emitter that is *not* hooked into the Scope digest cycle.
      *
      */
-    module.factory('ezEventEmitter', ['$log', function ($log) {
+    module.factory('ezEventEmitter', ['ezLogger', function (ezLogger) {
 
-        var factory = {};
+        var factory = {},
+            logger = ezLogger.create('ezEventEmitter');
+
+        logger.setLevel(ezLogger.logLevel.INFO);
 
         /**
          * @name module:ezNg.ezEventEmitter~EventEmitter
@@ -60,7 +63,7 @@
                         handlers[eventName] = [];
                     }
                     handlers[eventName].push(handler);
-                    $log.debug('Added handler for event '+ eventName + ' to emitter ' + emitter.name || '(anonymous)');
+                    logger.debug('Added handler for event '+ eventName + ' to emitter ' + emitter.name || '(anonymous)');
                 });
             };
 
@@ -90,7 +93,7 @@
              * ```
              */
             emitter.once = function (events, handler) {
-                $log.debug('Added one-time handler for event '+ events + ' to emitter ' + emitter.name || '(anonymous)');
+                logger.debug('Added one-time handler for event '+ events + ' to emitter ' + emitter.name || '(anonymous)');
                 handler.onlyOnce = true;
                 emitter.on(events, handler);
             };
@@ -129,7 +132,7 @@
                         return;
                     }
                     handlers[eventName].splice(handlers[eventName].indexOf(handler), 1);
-                    $log.debug('Removed handler for event '+ eventName + ' from emitter ' + emitter.name || '(anonymous)');
+                    logger.debug('Removed handler for event '+ eventName + ' from emitter ' + emitter.name || '(anonymous)');
                 });
             };
 
@@ -175,7 +178,7 @@
                         emitter.off(eventName, handler);
                     });
                 }
-                $log.debug('Emitted event '+ eventName + ' with emitter ' + emitter.name || '(anonymous)' + '. Invoked ' + handlerCount + ' handlers.');
+                logger.debug('Emitted event '+ eventName + ' with emitter ' + emitter.name || '(anonymous)' + '. Invoked ' + handlerCount + ' handlers.');
             };
 
             return emitter;
@@ -224,6 +227,42 @@
          */
         factory.mixin = function (object, name) {
             return angular.extend(object, createEmitter(name));
+        };
+
+        /**
+         * @ngdoc method
+         * @name module:ezNg.ezEventEmitter#debug
+         * @method
+         *
+         * @description
+         * Put ezEventEmitter into debug mode. This will cause all actions
+         * to be logged to the console for easy debugging.
+         *
+         * @example
+         * ```js
+         * let emitter = ezEventEmitter.create('myEmitter');
+         * ezEventEmitter.debug();
+         *
+         * emitter.emit('hello'); //"Emitted event hello with emitter myEmitter. Invoked 0 handlers."
+         *```
+         */
+        factory.debug = function () {
+            logger.setLevel(ezLogger.logLevel.DEBUG);
+        };
+
+        /**
+         * @ngdoc method
+         * @name module:ezNg.ezEventEmitter#_getLogger
+         * @method
+         *
+         * @description
+         * Debugging function for retrieving a reference to the logger
+         *
+         * @returns {Logger}
+         * @private
+         */
+        factory._getLogger = function () {
+            return logger;
         };
 
         return factory;

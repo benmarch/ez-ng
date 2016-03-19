@@ -166,11 +166,13 @@
              * @param {LogLevel} level Threshold log level. See {@link module:ezNg.ezLoggerLevel}
              */
             logger.setLevel = function (level) {
-                logger.level = LogLevel[level];
+                logger.level = level;
             };
 
             return logger;
         };
+
+        factory.logLevel = LogLevel;
 
         return factory;
 

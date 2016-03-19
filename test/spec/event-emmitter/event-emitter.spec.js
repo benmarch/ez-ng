@@ -3,12 +3,14 @@
 
 describe('ezEventEmitter', function () {
 
-    var ezEventEmitter;
+    var ezEventEmitter,
+        ezLogger;
 
     beforeEach(module('ezNg'));
 
-    beforeEach(inject(function (_ezEventEmitter_) {
+    beforeEach(inject(function (_ezEventEmitter_, _ezLogger_) {
         ezEventEmitter = _ezEventEmitter_;
+        ezLogger = _ezLogger_;
     }));
 
     it('should create a new emitter with given name', function () {
@@ -138,6 +140,35 @@ describe('ezEventEmitter', function () {
 
         //then
         expect(handler).toHaveBeenCalledWith('arg1', 2, {arg: 3}, [4]);
+    });
+
+    it('should not log by default', function () {
+
+        //given
+        var em = ezEventEmitter.create('myEmitter'),
+            logger = ezEventEmitter._getLogger();
+
+        //when
+        em.emit('hello');
+
+        //then
+        expect(logger.level).toBe(ezLogger.logLevel.INFO);
+
+    });
+
+    it('should log in debug mode', function () {
+
+        //given
+        var em = ezEventEmitter.create('myEmitter'),
+            logger = ezEventEmitter._getLogger();
+
+        //when
+        ezEventEmitter.debug();
+        em.emit('hello');
+
+        //then
+        expect(logger.level).toBe(ezLogger.logLevel.DEBUG);
+
     });
 
 });

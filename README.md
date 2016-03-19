@@ -62,6 +62,7 @@ A collection of very simple utilities that make developing AngularJS apps much e
         * _instance_
             * [.create([name])](#module_ezNg.ezEventEmitter+create) ⇒ <code>[EventEmitter](#module_ezNg.ezEventEmitter..EventEmitter)</code>
             * [.mixin(object, [name])](#module_ezNg.ezEventEmitter+mixin) ⇒ <code>[EventEmitter](#module_ezNg.ezEventEmitter..EventEmitter)</code>
+            * [.debug()](#module_ezNg.ezEventEmitter+debug)
         * _inner_
             * [~EventEmitter](#module_ezNg.ezEventEmitter..EventEmitter)
                 * [.on(events, handler)](#module_ezNg.ezEventEmitter..EventEmitter+on)
@@ -217,6 +218,7 @@ Provides a simple event emitter that is *not* hooked into the Scope digest cycle
     * _instance_
         * [.create([name])](#module_ezNg.ezEventEmitter+create) ⇒ <code>[EventEmitter](#module_ezNg.ezEventEmitter..EventEmitter)</code>
         * [.mixin(object, [name])](#module_ezNg.ezEventEmitter+mixin) ⇒ <code>[EventEmitter](#module_ezNg.ezEventEmitter..EventEmitter)</code>
+        * [.debug()](#module_ezNg.ezEventEmitter+debug)
     * _inner_
         * [~EventEmitter](#module_ezNg.ezEventEmitter..EventEmitter)
             * [.on(events, handler)](#module_ezNg.ezEventEmitter..EventEmitter+on)
@@ -258,6 +260,20 @@ let myObject = {},
 
 myObject.on('myEvent', function () {});
 myObject.emit('myEvent');
+```
+<a name="module_ezNg.ezEventEmitter+debug"></a>
+#### ezEventEmitter.debug()
+Put ezEventEmitter into debug mode. This will cause all actions
+to be logged to the console for easy debugging.
+
+**Kind**: instance method of <code>[ezEventEmitter](#module_ezNg.ezEventEmitter)</code>  
+**Ngdoc**: method  
+**Example**  
+```js
+let emitter = ezEventEmitter.create('myEmitter');
+ezEventEmitter.debug();
+
+emitter.emit('hello'); //"Emitted event hello with emitter myEmitter. Invoked 0 handlers."
 ```
 <a name="module_ezNg.ezEventEmitter..EventEmitter"></a>
 #### ezEventEmitter~EventEmitter
