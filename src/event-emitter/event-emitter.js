@@ -30,9 +30,29 @@
         function createEmitter(name) {
 
             var handlers = {},
+                toRemove = {},
                 emitter = {
                     _name: name
-                };
+                },
+                emitting = false;
+
+            function queueForRemoval(eventName, handler) {
+                if (!toRemove[eventName]) {
+                    toRemove[eventName] = [];
+                }
+                toRemove[eventName].push(handler);
+            }
+
+            function flushRemovals() {
+                angular.forEach(toRemove, function (handlerList, eventName) {
+                    if (handlers[eventName]) {
+                        angular.forEach(handlerList, function (handler) {
+                            handlers[eventName].splice(handlers[eventName].indexOf(handler), 1);
+                        });
+                    }
+                });
+                toRemove = {};
+            }
 
             /**
              * @name module:ezNg.ezEventEmitter~EventEmitter#on
@@ -131,7 +151,11 @@
                     if (!handlers[eventName]) {
                         return;
                     }
-                    handlers[eventName].splice(handlers[eventName].indexOf(handler), 1);
+                    if (emitting) {
+                        queueForRemoval(eventName, handler);
+                    } else {
+                        handlers[eventName].splice(handlers[eventName].indexOf(handler), 1);
+                    }
                     logger.debug('Removed handler for event '+ eventName + ' from emitter ' + emitter.name || '(anonymous)');
                 });
             };
@@ -161,23 +185,22 @@
              */
             emitter.emit = function (eventName/*, arguments*/) {
                 var args = Array.prototype.slice.call(arguments),
-                    handlerCount = 0,
-                    toRemove = [];
+                    handlerCount = 0;
 
                 args.shift();
+                emitting = true;
 
                 if (handlers[eventName]) {
                     handlerCount = handlers[eventName].length;
                     angular.forEach(handlers[eventName], function (handler) {
                         handler.apply(null, args);
                         if (handler.onlyOnce) {
-                            toRemove.push(handler);
+                            queueForRemoval(eventName, handler);
                         }
                     });
-                    angular.forEach(toRemove, function (handler) {
-                        emitter.off(eventName, handler);
-                    });
                 }
+                flushRemovals();
+                emitting = false;
                 logger.debug('Emitted event '+ eventName + ' with emitter ' + emitter.name || '(anonymous)' + '. Invoked ' + handlerCount + ' handlers.');
             };
 

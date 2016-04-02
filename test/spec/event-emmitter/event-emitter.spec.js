@@ -129,6 +129,38 @@ describe('ezEventEmitter', function () {
         expect(handler3).toHaveBeenCalled();
     });
 
+    it('should call all handlers when #off() is called within a handler', function () {
+
+        //given
+        var em = ezEventEmitter.create('myEmitter');
+        var handlers = {
+            first: function () {
+                em.off('test', handlers.first);
+            },
+            second: function () {
+                em.off('test', handlers.second);
+            },
+            third: function () {
+                em.off('test', handlers.third);
+            }
+        };
+        spyOn(handlers, 'first').and.callThrough();
+        spyOn(handlers, 'second').and.callThrough();
+        spyOn(handlers, 'third').and.callThrough();
+        em.on('test', handlers.first);
+        em.on('test', handlers.second);
+        em.on('test', handlers.third);
+
+        //when
+        em.emit('test');
+
+        //then
+        expect(handlers.first).toHaveBeenCalled();
+        expect(handlers.second).toHaveBeenCalled();
+        expect(handlers.third).toHaveBeenCalled();
+
+    });
+
     it('should pass arguments to handlers', function () {
         //given
         var em = ezEventEmitter.create('myEmitter');
