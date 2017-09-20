@@ -102,8 +102,8 @@
             helpers.useTemplateUrl = function (url) {
                 return $http.get(url, {
                     cache: $templateCache
-                }).success(function (template) {
-                    helpers.useTemplate(template);
+                }).then(function (response) {
+                    helpers.useTemplate(response.data);
                 });
             };
 
@@ -142,9 +142,6 @@
                 wrapper.append(element);
 
                 styles = $window.scoper(styles, '#' + id);
-                /*el.type = 'text/css';
-                el.scoped = true;
-                el.setAttribute('scoped', 'scoped');*/
                 if (el.styleSheet){
                     el.styleSheet.cssText += styles;
                 } else {
@@ -181,8 +178,8 @@
             helpers.useStylesUrl = function (url) {
                 return $http.get(url, {
                     cache: $templateCache
-                }).success(function (styles) {
-                    helpers.useStyles(styles);
+                }).then(function (response) {
+                    helpers.useStyles(response.data);
                 });
             };
 
